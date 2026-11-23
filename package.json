@@ -1,0 +1,14 @@
+{
+  "name": "ore-decision-lab",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Evidence-driven, fully synthetic gold process decision laboratory for GitHub Pages.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && python3 scripts/build_site.py",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "serve": "python3 -m http.server 8000 --directory dist",
+    "check": "npm run test"
+  },
+  "engines": {"node": ">=20"}
+}

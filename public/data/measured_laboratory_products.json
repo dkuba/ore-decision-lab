@@ -1,0 +1,686 @@
+[
+  {
+    "run_id": "A_CIL",
+    "ore_id": "A",
+    "stage": "cil_final",
+    "feed_sample_id": "SYN-ORE-A-COMPOSITE-01",
+    "feed_mass_kg": "2",
+    "feed_assay_au_gpt": "2.4",
+    "feed_measured_au_g": "0.0048",
+    "p80_um": "75",
+    "duration_hours": "24",
+    "products": [
+      {
+        "name": "recovered_gold",
+        "product_id": "A_CIL:recovered_gold",
+        "phase": "recovered_gold",
+        "measured_recovered_au_g": "0.004368",
+        "measured_au_g": "0.004368"
+      },
+      {
+        "name": "residue",
+        "product_id": "A_CIL:residue",
+        "phase": "solid",
+        "mass_kg": "2",
+        "assay_au_gpt": "0.2206872",
+        "measured_au_g": "0.0004413744"
+      }
+    ],
+    "feed_derived_from_product": null,
+    "protocol_id": "P02",
+    "synthetic": true
+  },
+  {
+    "run_id": "A_CIP",
+    "ore_id": "A",
+    "stage": "cip_final",
+    "feed_sample_id": "SYN-ORE-A-COMPOSITE-01",
+    "feed_mass_kg": "2",
+    "feed_assay_au_gpt": "2.4",
+    "feed_measured_au_g": "0.0048",
+    "p80_um": "75",
+    "duration_hours": "24",
+    "products": [
+      {
+        "name": "recovered_gold",
+        "product_id": "A_CIP:recovered_gold",
+        "phase": "recovered_gold",
+        "measured_recovered_au_g": "0.00432",
+        "measured_au_g": "0.00432"
+      },
+      {
+        "name": "residue",
+        "product_id": "A_CIP:residue",
+        "phase": "solid",
+        "mass_kg": "2",
+        "assay_au_gpt": "0.238992",
+        "measured_au_g": "0.000477984"
+      }
+    ],
+    "feed_derived_from_product": null,
+    "protocol_id": "P02",
+    "synthetic": true
+  },
+  {
+    "run_id": "A_GRAV",
+    "ore_id": "A",
+    "stage": "gravity_split",
+    "feed_sample_id": "SYN-ORE-A-COMPOSITE-01",
+    "feed_mass_kg": "200",
+    "feed_assay_au_gpt": "2.4",
+    "feed_measured_au_g": "0.48",
+    "p80_um": "75",
+    "duration_hours": "1",
+    "products": [
+      {
+        "name": "concentrate",
+        "product_id": "A_GRAV:concentrate",
+        "phase": "solid",
+        "mass_kg": "1",
+        "assay_au_gpt": "132.33024",
+        "measured_au_g": "0.13233024"
+      },
+      {
+        "name": "tailings",
+        "product_id": "A_GRAV:tailings",
+        "phase": "solid",
+        "mass_kg": "199",
+        "assay_au_gpt": "1.75283457",
+        "measured_au_g": "0.3488140794"
+      }
+    ],
+    "feed_derived_from_product": null,
+    "protocol_id": "P03",
+    "synthetic": true
+  },
+  {
+    "run_id": "A_GRAV_FINAL",
+    "ore_id": "A",
+    "stage": "gravity_concentrate_final",
+    "feed_sample_id": "SYN-ORE-A-COMPOSITE-01",
+    "feed_mass_kg": "0.6",
+    "feed_assay_au_gpt": "132.33024",
+    "feed_measured_au_g": "0.079398144",
+    "p80_um": "75",
+    "duration_hours": "1",
+    "products": [
+      {
+        "name": "recovered_gold",
+        "product_id": "A_GRAV_FINAL:recovered_gold",
+        "phase": "recovered_gold",
+        "measured_recovered_au_g": "0.0762222182",
+        "measured_au_g": "0.0762222182"
+      },
+      {
+        "name": "residue",
+        "product_id": "A_GRAV_FINAL:residue",
+        "phase": "solid",
+        "mass_kg": "0.6",
+        "assay_au_gpt": "5.38054756",
+        "measured_au_g": "0.0032283285"
+      }
+    ],
+    "feed_derived_from_product": {
+      "source_run_id": "A_GRAV",
+      "source_product": "concentrate",
+      "sampling_type": "synthetic_representative_aliquot",
+      "aliquot_fraction": "0.6"
+    },
+    "protocol_id": "P03",
+    "synthetic": true
+  },
+  {
+    "run_id": "A_GRAV_TAIL_CIL",
+    "ore_id": "A",
+    "stage": "gravity_tail_cil_final",
+    "feed_sample_id": "SYN-ORE-A-COMPOSITE-01",
+    "feed_mass_kg": "2",
+    "feed_assay_au_gpt": "1.75283457",
+    "feed_measured_au_g": "0.0035056691",
+    "p80_um": "75",
+    "duration_hours": "24",
+    "products": [
+      {
+        "name": "recovered_gold",
+        "product_id": "A_GRAV_TAIL_CIL:recovered_gold",
+        "phase": "recovered_gold",
+        "measured_recovered_au_g": "0.0030674605",
+        "measured_au_g": "0.0030674605"
+      },
+      {
+        "name": "residue",
+        "product_id": "A_GRAV_TAIL_CIL:residue",
+        "phase": "solid",
+        "mass_kg": "2",
+        "assay_au_gpt": "0.21741722",
+        "measured_au_g": "0.0004348344"
+      }
+    ],
+    "feed_derived_from_product": {
+      "source_run_id": "A_GRAV",
+      "source_product": "tailings",
+      "sampling_type": "synthetic_representative_aliquot",
+      "aliquot_fraction": "0.0100502513"
+    },
+    "protocol_id": "P03",
+    "synthetic": true
+  },
+  {
+    "run_id": "B_CIL",
+    "ore_id": "B",
+    "stage": "cil_final",
+    "feed_sample_id": "SYN-ORE-B-COMPOSITE-01",
+    "feed_mass_kg": "2",
+    "feed_assay_au_gpt": "2.4",
+    "feed_measured_au_g": "0.0048",
+    "p80_um": "75",
+    "duration_hours": "24",
+    "products": [
+      {
+        "name": "recovered_gold",
+        "product_id": "B_CIL:recovered_gold",
+        "phase": "recovered_gold",
+        "measured_recovered_au_g": "0.00144",
+        "measured_au_g": "0.00144"
+      },
+      {
+        "name": "residue",
+        "product_id": "B_CIL:residue",
+        "phase": "solid",
+        "mass_kg": "2",
+        "assay_au_gpt": "1.645392",
+        "measured_au_g": "0.003290784"
+      }
+    ],
+    "feed_derived_from_product": null,
+    "protocol_id": "P05",
+    "synthetic": true
+  },
+  {
+    "run_id": "B_FLOT",
+    "ore_id": "B",
+    "stage": "flotation_split",
+    "feed_sample_id": "SYN-ORE-B-COMPOSITE-01",
+    "feed_mass_kg": "20",
+    "feed_assay_au_gpt": "2.4",
+    "feed_measured_au_g": "0.048",
+    "p80_um": "75",
+    "duration_hours": "1",
+    "products": [
+      {
+        "name": "concentrate",
+        "product_id": "B_FLOT:concentrate",
+        "phase": "solid",
+        "mass_kg": "2",
+        "assay_au_gpt": "20.50416",
+        "measured_au_g": "0.04100832"
+      },
+      {
+        "name": "tailings",
+        "product_id": "B_FLOT:tailings",
+        "phase": "solid",
+        "mass_kg": "18",
+        "assay_au_gpt": "0.33838133",
+        "measured_au_g": "0.0060908639"
+      }
+    ],
+    "feed_derived_from_product": null,
+    "protocol_id": "P05",
+    "synthetic": true
+  },
+  {
+    "run_id": "B_POX",
+    "ore_id": "B",
+    "stage": "pox_concentrate_final",
+    "feed_sample_id": "SYN-ORE-B-COMPOSITE-01",
+    "feed_mass_kg": "1",
+    "feed_assay_au_gpt": "20.50416",
+    "feed_measured_au_g": "0.02050416",
+    "p80_um": "75",
+    "duration_hours": "2",
+    "products": [
+      {
+        "name": "recovered_gold",
+        "product_id": "B_POX:recovered_gold",
+        "phase": "recovered_gold",
+        "measured_recovered_au_g": "0.0192739104",
+        "measured_au_g": "0.0192739104"
+      },
+      {
+        "name": "residue",
+        "product_id": "B_POX:residue",
+        "phase": "solid",
+        "mass_kg": "1",
+        "assay_au_gpt": "1.237139",
+        "measured_au_g": "0.001237139"
+      }
+    ],
+    "feed_derived_from_product": {
+      "source_run_id": "B_FLOT",
+      "source_product": "concentrate",
+      "sampling_type": "synthetic_representative_aliquot",
+      "aliquot_fraction": "0.5"
+    },
+    "protocol_id": "P06",
+    "synthetic": true
+  },
+  {
+    "run_id": "B_BIOX",
+    "ore_id": "B",
+    "stage": "biox_concentrate_final",
+    "feed_sample_id": "SYN-ORE-B-COMPOSITE-01",
+    "feed_mass_kg": "1",
+    "feed_assay_au_gpt": "20.50416",
+    "feed_measured_au_g": "0.02050416",
+    "p80_um": "75",
+    "duration_hours": "144",
+    "products": [
+      {
+        "name": "recovered_gold",
+        "product_id": "B_BIOX:recovered_gold",
+        "phase": "recovered_gold",
+        "measured_recovered_au_g": "0.0166083696",
+        "measured_au_g": "0.0166083696"
+      },
+      {
+        "name": "residue",
+        "product_id": "B_BIOX:residue",
+        "phase": "solid",
+        "mass_kg": "1",
+        "assay_au_gpt": "3.97682284",
+        "measured_au_g": "0.0039768228"
+      }
+    ],
+    "feed_derived_from_product": {
+      "source_run_id": "B_FLOT",
+      "source_product": "concentrate",
+      "sampling_type": "synthetic_representative_aliquot",
+      "aliquot_fraction": "0.5"
+    },
+    "protocol_id": "P06",
+    "synthetic": true
+  },
+  {
+    "run_id": "D_GRAV",
+    "ore_id": "D",
+    "stage": "gravity_split",
+    "feed_sample_id": "SYN-ORE-D-COMPOSITE-01",
+    "feed_mass_kg": "200",
+    "feed_assay_au_gpt": "2.4",
+    "feed_measured_au_g": "0.48",
+    "p80_um": "75",
+    "duration_hours": "1",
+    "products": [
+      {
+        "name": "concentrate",
+        "product_id": "D_GRAV:concentrate",
+        "phase": "solid",
+        "mass_kg": "1",
+        "assay_au_gpt": "230.15712",
+        "measured_au_g": "0.23015712"
+      },
+      {
+        "name": "tailings",
+        "product_id": "D_GRAV:tailings",
+        "phase": "solid",
+        "mass_kg": "199",
+        "assay_au_gpt": "1.30523819",
+        "measured_au_g": "0.2597423998"
+      }
+    ],
+    "feed_derived_from_product": null,
+    "protocol_id": "P11",
+    "synthetic": true
+  },
+  {
+    "run_id": "D_GRAV_FINAL",
+    "ore_id": "D",
+    "stage": "gravity_concentrate_final",
+    "feed_sample_id": "SYN-ORE-D-COMPOSITE-01",
+    "feed_mass_kg": "0.6",
+    "feed_assay_au_gpt": "230.15712",
+    "feed_measured_au_g": "0.138094272",
+    "p80_um": "75",
+    "duration_hours": "1",
+    "products": [
+      {
+        "name": "recovered_gold",
+        "product_id": "D_GRAV_FINAL:recovered_gold",
+        "phase": "recovered_gold",
+        "measured_recovered_au_g": "0.1353323866",
+        "measured_au_g": "0.1353323866"
+      },
+      {
+        "name": "residue",
+        "product_id": "D_GRAV_FINAL:residue",
+        "phase": "solid",
+        "mass_kg": "0.6",
+        "assay_au_gpt": "4.52120647",
+        "measured_au_g": "0.0027127239"
+      }
+    ],
+    "feed_derived_from_product": {
+      "source_run_id": "D_GRAV",
+      "source_product": "concentrate",
+      "sampling_type": "synthetic_representative_aliquot",
+      "aliquot_fraction": "0.6"
+    },
+    "protocol_id": "P11",
+    "synthetic": true
+  },
+  {
+    "run_id": "D_GRAV_TAIL_CIL",
+    "ore_id": "D",
+    "stage": "gravity_tail_cil_final",
+    "feed_sample_id": "SYN-ORE-D-COMPOSITE-01",
+    "feed_mass_kg": "2",
+    "feed_assay_au_gpt": "1.30523819",
+    "feed_measured_au_g": "0.0026104764",
+    "p80_um": "75",
+    "duration_hours": "24",
+    "products": [
+      {
+        "name": "recovered_gold",
+        "product_id": "D_GRAV_TAIL_CIL:recovered_gold",
+        "phase": "recovered_gold",
+        "measured_recovered_au_g": "0.0020622763",
+        "measured_au_g": "0.0020622763"
+      },
+      {
+        "name": "residue",
+        "product_id": "D_GRAV_TAIL_CIL:residue",
+        "phase": "solid",
+        "mass_kg": "2",
+        "assay_au_gpt": "0.2773344",
+        "measured_au_g": "0.0005546688"
+      }
+    ],
+    "feed_derived_from_product": {
+      "source_run_id": "D_GRAV",
+      "source_product": "tailings",
+      "sampling_type": "synthetic_representative_aliquot",
+      "aliquot_fraction": "0.0100502513"
+    },
+    "protocol_id": "P11",
+    "synthetic": true
+  },
+  {
+    "run_id": "D_CIL",
+    "ore_id": "D",
+    "stage": "cil_final",
+    "feed_sample_id": "SYN-ORE-D-COMPOSITE-01",
+    "feed_mass_kg": "2",
+    "feed_assay_au_gpt": "2.4",
+    "feed_measured_au_g": "0.0048",
+    "p80_um": "75",
+    "duration_hours": "24",
+    "products": [
+      {
+        "name": "recovered_gold",
+        "product_id": "D_CIL:recovered_gold",
+        "phase": "recovered_gold",
+        "measured_recovered_au_g": "0.002976",
+        "measured_au_g": "0.002976"
+      },
+      {
+        "name": "residue",
+        "product_id": "D_CIL:residue",
+        "phase": "solid",
+        "mass_kg": "2",
+        "assay_au_gpt": "0.9160128",
+        "measured_au_g": "0.0018320256"
+      }
+    ],
+    "feed_derived_from_product": null,
+    "protocol_id": "P12",
+    "synthetic": true
+  },
+  {
+    "run_id": "D_CIP",
+    "ore_id": "D",
+    "stage": "cip_final",
+    "feed_sample_id": "SYN-ORE-D-COMPOSITE-01",
+    "feed_mass_kg": "2",
+    "feed_assay_au_gpt": "2.4",
+    "feed_measured_au_g": "0.0048",
+    "p80_um": "75",
+    "duration_hours": "24",
+    "products": [
+      {
+        "name": "recovered_gold",
+        "product_id": "D_CIP:recovered_gold",
+        "phase": "recovered_gold",
+        "measured_recovered_au_g": "0.002544",
+        "measured_au_g": "0.002544"
+      },
+      {
+        "name": "residue",
+        "product_id": "D_CIP:residue",
+        "phase": "solid",
+        "mass_kg": "2",
+        "assay_au_gpt": "1.1044248",
+        "measured_au_g": "0.0022088496"
+      }
+    ],
+    "feed_derived_from_product": null,
+    "protocol_id": "P12",
+    "synthetic": true
+  },
+  {
+    "run_id": "C_HEAP_06",
+    "ore_id": "C",
+    "stage": "heap_adr_final",
+    "feed_sample_id": "SYN-ORE-C-G06",
+    "feed_mass_kg": "20",
+    "feed_assay_au_gpt": "0.6",
+    "feed_measured_au_g": "0.012",
+    "p80_um": "12000",
+    "duration_hours": "1440",
+    "products": [
+      {
+        "name": "recovered_gold",
+        "product_id": "C_HEAP_06:recovered_gold",
+        "phase": "recovered_gold",
+        "measured_recovered_au_g": "0.00912",
+        "measured_au_g": "0.00912"
+      },
+      {
+        "name": "residue",
+        "product_id": "C_HEAP_06:residue",
+        "phase": "solid",
+        "mass_kg": "20",
+        "assay_au_gpt": "0.1460448",
+        "measured_au_g": "0.002920896"
+      }
+    ],
+    "feed_derived_from_product": null,
+    "protocol_id": "P08",
+    "synthetic": true
+  },
+  {
+    "run_id": "C_CIL_06",
+    "ore_id": "C",
+    "stage": "cil_final",
+    "feed_sample_id": "SYN-ORE-C-G06",
+    "feed_mass_kg": "2",
+    "feed_assay_au_gpt": "0.6",
+    "feed_measured_au_g": "0.0012",
+    "p80_um": "75",
+    "duration_hours": "24",
+    "products": [
+      {
+        "name": "recovered_gold",
+        "product_id": "C_CIL_06:recovered_gold",
+        "phase": "recovered_gold",
+        "measured_recovered_au_g": "0.00108",
+        "measured_au_g": "0.00108"
+      },
+      {
+        "name": "residue",
+        "product_id": "C_CIL_06:residue",
+        "phase": "solid",
+        "mass_kg": "2",
+        "assay_au_gpt": "0.058236",
+        "measured_au_g": "0.000116472"
+      }
+    ],
+    "feed_derived_from_product": null,
+    "protocol_id": "P09",
+    "synthetic": true
+  },
+  {
+    "run_id": "C_HEAP_08",
+    "ore_id": "C",
+    "stage": "heap_adr_final",
+    "feed_sample_id": "SYN-ORE-C-G08",
+    "feed_mass_kg": "20",
+    "feed_assay_au_gpt": "0.8",
+    "feed_measured_au_g": "0.016",
+    "p80_um": "12000",
+    "duration_hours": "1440",
+    "products": [
+      {
+        "name": "recovered_gold",
+        "product_id": "C_HEAP_08:recovered_gold",
+        "phase": "recovered_gold",
+        "measured_recovered_au_g": "0.01216",
+        "measured_au_g": "0.01216"
+      },
+      {
+        "name": "residue",
+        "product_id": "C_HEAP_08:residue",
+        "phase": "solid",
+        "mass_kg": "20",
+        "assay_au_gpt": "0.1912704",
+        "measured_au_g": "0.003825408"
+      }
+    ],
+    "feed_derived_from_product": null,
+    "protocol_id": "P08",
+    "synthetic": true
+  },
+  {
+    "run_id": "C_CIL_08",
+    "ore_id": "C",
+    "stage": "cil_final",
+    "feed_sample_id": "SYN-ORE-C-G08",
+    "feed_mass_kg": "2",
+    "feed_assay_au_gpt": "0.8",
+    "feed_measured_au_g": "0.0016",
+    "p80_um": "75",
+    "duration_hours": "24",
+    "products": [
+      {
+        "name": "recovered_gold",
+        "product_id": "C_CIL_08:recovered_gold",
+        "phase": "recovered_gold",
+        "measured_recovered_au_g": "0.00144",
+        "measured_au_g": "0.00144"
+      },
+      {
+        "name": "residue",
+        "product_id": "C_CIL_08:residue",
+        "phase": "solid",
+        "mass_kg": "2",
+        "assay_au_gpt": "0.081336",
+        "measured_au_g": "0.000162672"
+      }
+    ],
+    "feed_derived_from_product": null,
+    "protocol_id": "P09",
+    "synthetic": true
+  },
+  {
+    "run_id": "C_HEAP_16",
+    "ore_id": "C",
+    "stage": "heap_adr_final",
+    "feed_sample_id": "SYN-ORE-C-G16",
+    "feed_mass_kg": "20",
+    "feed_assay_au_gpt": "1.6",
+    "feed_measured_au_g": "0.032",
+    "p80_um": "12000",
+    "duration_hours": "1440",
+    "products": [
+      {
+        "name": "recovered_gold",
+        "product_id": "C_HEAP_16:recovered_gold",
+        "phase": "recovered_gold",
+        "measured_recovered_au_g": "0.02432",
+        "measured_au_g": "0.02432"
+      },
+      {
+        "name": "residue",
+        "product_id": "C_HEAP_16:residue",
+        "phase": "solid",
+        "mass_kg": "20",
+        "assay_au_gpt": "0.3878016",
+        "measured_au_g": "0.007756032"
+      }
+    ],
+    "feed_derived_from_product": null,
+    "protocol_id": "P08",
+    "synthetic": true
+  },
+  {
+    "run_id": "C_CIL_16",
+    "ore_id": "C",
+    "stage": "cil_final",
+    "feed_sample_id": "SYN-ORE-C-G16",
+    "feed_mass_kg": "2",
+    "feed_assay_au_gpt": "1.6",
+    "feed_measured_au_g": "0.0032",
+    "p80_um": "75",
+    "duration_hours": "24",
+    "products": [
+      {
+        "name": "recovered_gold",
+        "product_id": "C_CIL_16:recovered_gold",
+        "phase": "recovered_gold",
+        "measured_recovered_au_g": "0.00288",
+        "measured_au_g": "0.00288"
+      },
+      {
+        "name": "residue",
+        "product_id": "C_CIL_16:residue",
+        "phase": "solid",
+        "mass_kg": "2",
+        "assay_au_gpt": "0.163296",
+        "measured_au_g": "0.000326592"
+      }
+    ],
+    "feed_derived_from_product": null,
+    "protocol_id": "P09",
+    "synthetic": true
+  },
+  {
+    "run_id": "C_CIL_BAD_REPEAT",
+    "ore_id": "C",
+    "stage": "cil_final",
+    "feed_sample_id": "SYN-ORE-C-COMPOSITE-01",
+    "feed_mass_kg": "2",
+    "feed_assay_au_gpt": "0.8",
+    "feed_measured_au_g": "0.0016",
+    "p80_um": "75",
+    "duration_hours": "24",
+    "products": [
+      {
+        "name": "recovered_gold",
+        "product_id": "C_CIL_BAD_REPEAT:recovered_gold",
+        "phase": "recovered_gold",
+        "measured_recovered_au_g": "0.00144",
+        "measured_au_g": "0.00144"
+      },
+      {
+        "name": "residue",
+        "product_id": "C_CIL_BAD_REPEAT:residue",
+        "phase": "solid",
+        "mass_kg": "2",
+        "assay_au_gpt": "0.148",
+        "measured_au_g": "0.000296"
+      }
+    ],
+    "feed_derived_from_product": null,
+    "protocol_id": "P09",
+    "synthetic": true
+  }
+]

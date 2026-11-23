@@ -1,0 +1,339 @@
+{
+  "schema_version": "literature-candidate-fixtures-1",
+  "synthetic": true,
+  "gold_price_USD_per_g": "95",
+  "lab_max_abs_relative_imbalance": "0.05",
+  "indifference_band_USD_per_t": "0.50",
+  "C_grade_applicability_scope_gpt": {
+    "min": "0.60",
+    "max": "1.60"
+  },
+  "C_grade_observed_levels_gpt": [
+    "0.60",
+    "0.80",
+    "1.60"
+  ],
+  "lab_observations": {
+    "C": {
+      "scoping_infiltration_screen_pass": {
+        "test_id": "P08_HYD",
+        "measured_value": "10.5",
+        "required_minimum": "8.0",
+        "unit": "mm/h",
+        "source_id": "SYN-P08",
+        "interpretation": "UNLOADED_SCOPING_RATE_NOT_LOAD_KSAT",
+        "engineering_qualification": "NOT_DONE"
+      }
+    }
+  },
+  "ores": {
+    "A": {
+      "assays": {
+        "Au_gpt": "2.4",
+        "S_pct": "0.18",
+        "As_pct": "0.03",
+        "organic_C_pct": "0.12"
+      },
+      "mineralogy": {
+        "free_au_fraction": "0.45",
+        "sulphide_host_fraction": "0.12",
+        "other_host_fraction": "0.43",
+        "coarse_free_gold_fraction": "0.10",
+        "preg_robbing_index": "0.03",
+        "coarse_gold_observed": true,
+        "gold_entrapment_mode": "not_demonstrated",
+        "direct_leach_control_warranted": true,
+        "weathering_state": "unclassified"
+      },
+      "site": {
+        "heap_pad_suitable": true,
+        "tank_available": true,
+        "autoclave_utilities_available": true,
+        "biooxidation_possible": true
+      }
+    },
+    "B": {
+      "assays": {
+        "Au_gpt": "2.4",
+        "S_pct": "3.6",
+        "As_pct": "0.8",
+        "organic_C_pct": "0.12"
+      },
+      "mineralogy": {
+        "free_au_fraction": "0.05",
+        "sulphide_host_fraction": "0.78",
+        "other_host_fraction": "0.17",
+        "coarse_free_gold_fraction": "0.02",
+        "preg_robbing_index": "0.04",
+        "coarse_gold_observed": false,
+        "gold_entrapment_mode": "sulfide_locked",
+        "direct_leach_control_warranted": true,
+        "weathering_state": "unclassified"
+      },
+      "site": {
+        "heap_pad_suitable": true,
+        "tank_available": true,
+        "autoclave_utilities_available": true,
+        "biooxidation_possible": true
+      }
+    },
+    "C": {
+      "assays": {
+        "Au_gpt": "0.8",
+        "S_pct": "0.18",
+        "As_pct": "0.03",
+        "organic_C_pct": "0.12"
+      },
+      "mineralogy": {
+        "free_au_fraction": "0.38",
+        "sulphide_host_fraction": "0.10",
+        "other_host_fraction": "0.52",
+        "coarse_free_gold_fraction": "0.10",
+        "preg_robbing_index": "0.03",
+        "coarse_gold_observed": true,
+        "gold_entrapment_mode": "not_demonstrated",
+        "direct_leach_control_warranted": true,
+        "weathering_state": "oxidized"
+      },
+      "site": {
+        "heap_pad_suitable": true,
+        "tank_available": true,
+        "autoclave_utilities_available": true,
+        "biooxidation_possible": true
+      }
+    },
+    "D": {
+      "assays": {
+        "Au_gpt": "2.4",
+        "S_pct": "0.18",
+        "As_pct": "0.03",
+        "organic_C_pct": "0.12"
+      },
+      "mineralogy": {
+        "free_au_fraction": "0.66",
+        "sulphide_host_fraction": "0.12",
+        "other_host_fraction": "0.22",
+        "coarse_free_gold_fraction": "0.55",
+        "preg_robbing_index": "0.08",
+        "coarse_gold_observed": true,
+        "gold_entrapment_mode": "not_demonstrated",
+        "direct_leach_control_warranted": true,
+        "weathering_state": "unclassified"
+      },
+      "site": {
+        "heap_pad_suitable": true,
+        "tank_available": true,
+        "autoclave_utilities_available": true,
+        "biooxidation_possible": true
+      }
+    }
+  },
+  "routes": {
+    "DIRECT_CIL": {
+      "label": "Прямое CIL",
+      "steps": [
+        "cil_final"
+      ],
+      "required_site": [
+        "tank_available"
+      ],
+      "equipment": [
+        "измельчение: отдельный расчёт по физике руды",
+        "реакторы CIL",
+        "сорбция/десорбция",
+        "хвостовое хозяйство"
+      ]
+    },
+    "CIP": {
+      "label": "Выщелачивание + CIP",
+      "steps": [
+        "cip_final"
+      ],
+      "required_site": [
+        "tank_available"
+      ],
+      "equipment": [
+        "измельчение",
+        "реакторы выщелачивания",
+        "сорбционные аппараты CIP",
+        "десорбция"
+      ]
+    },
+    "GRAVITY_TAILS_CIL": {
+      "label": "Гравитация + доводка концентрата + CIL хвостов",
+      "steps": [
+        "gravity_split",
+        "gravity_concentrate_final",
+        "gravity_tail_cil_final"
+      ],
+      "required_site": [
+        "tank_available"
+      ],
+      "equipment": [
+        "измельчение",
+        "гравитационный концентратор",
+        "доводка концентрата",
+        "CIL хвостов"
+      ]
+    },
+    "FLOT_POX_CIL": {
+      "label": "Флотация → POX концентрата → CIL",
+      "steps": [
+        "flotation_split",
+        "pox_concentrate_final"
+      ],
+      "required_site": [
+        "tank_available",
+        "autoclave_utilities_available"
+      ],
+      "equipment": [
+        "измельчение",
+        "флотация",
+        "сгущение концентрата",
+        "автоклав / кислородное хозяйство",
+        "CIL"
+      ]
+    },
+    "FLOT_BIOX_CIL": {
+      "label": "Флотация → биоокисление концентрата → CIL",
+      "steps": [
+        "flotation_split",
+        "biox_concentrate_final"
+      ],
+      "required_site": [
+        "tank_available",
+        "biooxidation_possible"
+      ],
+      "equipment": [
+        "измельчение",
+        "флотация",
+        "биоокислительные реакторы",
+        "CIL"
+      ]
+    },
+    "HEAP_ADR": {
+      "label": "Кучное выщелачивание → ADR",
+      "steps": [
+        "heap_adr_final"
+      ],
+      "required_site": [
+        "heap_pad_suitable"
+      ],
+      "required_lab_gate": [
+        "scoping_infiltration_screen_pass"
+      ],
+      "equipment": [
+        "дробление/подготовка",
+        "штабелирование / гидроизоляция",
+        "орошение / сбор растворов",
+        "сорбция ADR"
+      ]
+    }
+  },
+  "costs_USD_per_t_feed": {
+    "A": {
+      "DIRECT_CIL": "42",
+      "CIP": "54",
+      "GRAVITY_TAILS_CIL": "68",
+      "FLOT_POX_CIL": "103",
+      "FLOT_BIOX_CIL": "94",
+      "HEAP_ADR": "25"
+    },
+    "B": {
+      "DIRECT_CIL": "42",
+      "CIP": "54",
+      "GRAVITY_TAILS_CIL": "68",
+      "FLOT_POX_CIL": "103",
+      "FLOT_BIOX_CIL": "94",
+      "HEAP_ADR": "25"
+    },
+    "C": {
+      "DIRECT_CIL": "42",
+      "CIP": "54",
+      "GRAVITY_TAILS_CIL": "68",
+      "FLOT_POX_CIL": "103",
+      "FLOT_BIOX_CIL": "94",
+      "HEAP_ADR": "25"
+    },
+    "D": {
+      "DIRECT_CIL": "42",
+      "CIP": "54",
+      "GRAVITY_TAILS_CIL": "68",
+      "FLOT_POX_CIL": "103",
+      "FLOT_BIOX_CIL": "94",
+      "HEAP_ADR": "25"
+    }
+  },
+  "cost_basis_explanation": {
+    "A": "All direct CIL costs fixed at synthetic 42 USD/t; this is a deliberately invented screening price, not a plant estimate.",
+    "B": "All direct CIL costs fixed at synthetic 42 USD/t; this is a deliberately invented screening price, not a plant estimate.",
+    "C": "All direct CIL costs fixed at synthetic 42 USD/t; this is a deliberately invented screening price, not a plant estimate.",
+    "D": "All direct CIL costs fixed at synthetic 42 USD/t; this is a deliberately invented screening price, not a plant estimate."
+  },
+  "ore_source_ids": {
+    "A": "SYN-P01",
+    "B": "SYN-P04",
+    "C": "SYN-P07",
+    "D": "SYN-P10"
+  },
+  "stage_run_mapping": {
+    "A": {
+      "DIRECT_CIL": [
+        "A_CIL"
+      ],
+      "CIP": [
+        "A_CIP"
+      ],
+      "GRAVITY_TAILS_CIL": [
+        "A_GRAV",
+        "A_GRAV_FINAL",
+        "A_GRAV_TAIL_CIL"
+      ]
+    },
+    "B": {
+      "DIRECT_CIL": [
+        "B_CIL"
+      ],
+      "FLOT_POX_CIL": [
+        "B_FLOT",
+        "B_POX"
+      ],
+      "FLOT_BIOX_CIL": [
+        "B_FLOT",
+        "B_BIOX"
+      ]
+    },
+    "C": {
+      "DIRECT_CIL": [
+        "C_CIL_06",
+        "C_CIL_08",
+        "C_CIL_16",
+        "C_CIL_BAD_REPEAT"
+      ],
+      "HEAP_ADR": [
+        "C_HEAP_06",
+        "C_HEAP_08",
+        "C_HEAP_16"
+      ]
+    },
+    "D": {
+      "DIRECT_CIL": [
+        "D_CIL"
+      ],
+      "CIP": [
+        "D_CIP"
+      ],
+      "GRAVITY_TAILS_CIL": [
+        "D_GRAV",
+        "D_GRAV_FINAL",
+        "D_GRAV_TAIL_CIL"
+      ]
+    }
+  },
+  "unit_cost_origin": "INVENTED_SCENARIO_FOR_SCREENING_NOT_PROJECT_COST_ESTIMATE",
+  "unqualified_site_assumptions": [
+    "loaded hydraulic conductivity",
+    "agglomerate durability",
+    "site water balance"
+  ]
+}
