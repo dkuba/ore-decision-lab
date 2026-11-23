@@ -40,6 +40,21 @@ with sync_playwright() as p:
   print('routes:',page.locator('#route-list').inner_text()[:200].replace('\n',' / '))
   print('body width',page.evaluate('document.body.scrollWidth'),'viewport',width)
   page.screenshot(path=str(out/f'{label}.png'),full_page=True,animations='disabled')
+  assert page.locator('#quick-next').count()==1, 'First-use CTA missing'
+  assert '32,81' in page.locator('#quick-live').inner_text(), 'Initial guide must reflect computed baseline'
+  page.locator('#quick-next').click()
+  assert page.locator('#grade').input_value()=='1.6', 'Primary CTA must change Au through normal inputs'
+  assert 'CIL' in page.locator('.quick-answer-title').inner_text(), 'New data should change selected route'
+  assert '94,52' in page.locator('#quick-live').inner_text(), 'Guide must use real calculation'
+  assert page.locator('[data-guide-step="1"]').get_attribute('aria-pressed')=='true', 'Guide stage not accessible'
+  page.locator('#quick-next').click()
+  assert page.locator('#status-message').count()==1
+  assert page.locator('.quick-uncertainty').count()==1, 'Hypothesis warning must be visible'
+  assert 'Нет подтверждённого лидера' in page.locator('.quick-answer-title').inner_text()
+  assert page.locator('[data-guide-step="2"]').get_attribute('aria-pressed')=='true'
+  # Restore baseline to keep the remainder of existing QA independent.
+  page.locator('[data-guide-step="0"]').click()
+  assert page.locator('#grade').input_value()=='0.8'
   if label=='desktop':
    page.locator('[data-ore="B"]').click()
    print('after ore B',page.locator('#current-ore').inner_text(),page.locator('#route-list').inner_text()[:160].replace('\n',' / '))
