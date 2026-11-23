@@ -12,13 +12,13 @@
 ## Перед публикацией — действия владельца
 
 - [ ] Убедиться, что право на открытое размещение кода и данных сохраняется.
-- [ ] Указать реальное имя оператора и рабочий адрес для связи в `public/site_config.json`.
+- [x] Указаны оператор «Кубарев Дмитрий Владимирович» и контакт `dkubarev@ya.ru` в `public/site_config.json`.
 - [ ] В Settings → Pages выбрать **Build and deployment → Source: GitHub Actions**.
-- [ ] В Settings → Secrets and variables → Actions → Variables установить `ODL_PUBLISH_ENABLED=true`.
+- [x] Workflow публикует только из `main` после успешного `verify` и проверки оператора; дополнительная переменная `ODL_PUBLISH_ENABLED` больше не нужна.
 - [ ] В `main` после merge открыть Actions и убедиться, что `verify` и `publish` успешны.
 - [ ] Открыть реальный `https://dkuba.github.io/ore-decision-lab/` и проверить сценарии A–D.
 - [ ] Проверить `?ore=C&grade=1.28&model=constant_recovery`, `constant_residue`, выход за scope и переключение источников.
 - [ ] Проверить просмотр `SYN-P01`–`SYN-P12`, список литературы, RU/EN, `mailto`, копирование URL и мобильную ширину.
 - [ ] При внешней публикации ясно обозначить: **fully synthetic; not industrially qualified**.
 
-Не публиковать без выполнения обязательных условий. Отсутствие оператора не препятствует CI и разработке, но препятствует публичному деплою.
+Не публиковать без выполнения обязательных условий. Отсутствие оператора или некорректный контакт блокируют публичный деплой через `scripts/check_publication.py`. Без включения GitHub Pages Source: GitHub Actions публикация также невозможна.

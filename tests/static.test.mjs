@@ -16,13 +16,16 @@ test('dist contains only intended static artifacts and no oracle, private source
  for(const f of manifest.files){const bytes=readFileSync(join(root,'dist',f.path));assert.equal(createHash('sha256').update(bytes).digest('hex'),f.sha256,`mismatch ${f.path}`);}
 });
 
-test('the publication gate is unconfigured by default',()=>{
+test('publication identifies the operator and can deploy only verified main',()=>{
  const config=json('public/site_config.json');
- assert.equal(config.operator_name,'');
- assert.equal(config.contact_email,'');
+ assert.equal(config.operator_name,'Кубарев Дмитрий Владимирович');
+ assert.equal(config.contact_email,'dkubarev@ya.ru');
  assert.ok(existsSync(join(root,'scripts/check_publication.py')));
  const workflow=readFileSync(join(root,'.github/workflows/pages.yml'),'utf-8');
- assert.match(workflow,/ODL_PUBLISH_ENABLED/);
+ assert.match(workflow,/github\.ref == 'refs\/heads\/main'/);
+ assert.match(workflow,/needs: verify/);
+ assert.match(workflow,/python3 scripts\/check_publication\.py/);
+ assert.doesNotMatch(workflow,/ODL_PUBLISH_ENABLED/);
 });
 
 test('public fixtures do not embed the hidden oracle',()=>{
