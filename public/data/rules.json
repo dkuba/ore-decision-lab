@@ -1,0 +1,73 @@
+{
+  "rule_set_version": "literature-triage-candidate-1",
+  "status": "LITERATURE_GROUNDED_HYPOTHESES_NOT_ENGINEERING_APPROVAL",
+  "policy": "The rules propose a test or refer to a recorded test, never infer final metal recovery, select equipment models, or approve a process.",
+  "rules": [
+    {
+      "id": "R-GRAVITY-SIZE-EVIDENCE",
+      "description": "Observed coarse liberated Au motivates size-resolved GRG and product-accounted gravity tests; GRG is not plant recovery.",
+      "predicate": {"field":"mineralogy.coarse_gold_observed","op":"==","value":true},
+      "priority": 2,
+      "candidate_routes": ["GRAVITY_TAILS_CIL"],
+      "testwork": [
+        {"test_id":"gravity_split","label":"Gravity separation with independent concentrate and tails assays"},
+        {"test_id":"gravity_concentrate_final","label":"Concentrate finishing and recovery of the discarded fraction"},
+        {"test_id":"gravity_tail_cil_final","label":"CIL of gravity tails with product assays"},
+        {"test_id":"size_resolved_grg","label":"Size-resolved GRG with independent splits (missing in current fixture)"}
+      ],
+      "citations":["LIT-03","LIT-04","LIT-01"],
+      "inference":"investigate_only_not_recovery_prediction"
+    },
+    {
+      "id": "R-REFRACTORY-SULPHIDE-EVIDENCE",
+      "description": "Source-backed observation of Au locked in sulphides and a poor direct leach result motivates flotation and comparison of pre-oxidation methods; POX/BIOX is not approved by S/As alone.",
+      "predicate": {"field":"mineralogy.gold_entrapment_mode","op":"==","value":"sulfide_locked"},
+      "priority": 1,
+      "candidate_routes": ["FLOT_POX_CIL","FLOT_BIOX_CIL"],
+      "testwork": [
+        {"test_id":"flotation_split","label":"Flotation: assayed concentrate and tails"},
+        {"test_id":"concentrate_direct_cil_control","label":"Unoxidized concentrate CIL control (missing)"},
+        {"test_id":"sulfide_s_oxidation_balance","label":"Sulfide-sulfur oxidation degree before/after POX/BIOX (missing)"},
+        {"test_id":"pox_concentrate_final","label":"POX plus subsequent CIL, separately timed and balanced"},
+        {"test_id":"biox_concentrate_final","label":"BIOX series plus subsequent CIL, separately timed and balanced"}
+      ],
+      "citations":["LIT-02","LIT-05","LIT-06","LIT-07"],
+      "inference":"investigate_only_not_technology_approval"
+    },
+    {
+      "id": "R-DIRECT-LEACH-CONTROL",
+      "description": "A direct leach baseline and its residue should be recorded for every studied ore type; it does not predict recovery or imply CIP must be tested.",
+      "predicate": {"field":"mineralogy.direct_leach_control_warranted","op":"==","value":true},
+      "priority": 2,
+      "candidate_routes": ["DIRECT_CIL"],
+      "testwork": [
+        {"test_id":"cil_final","label":"Direct CIL, conditions, reagents, assayed residue and final Au"},
+        {"test_id":"duplicate_leach_repeatability","label":"Independent leach split or repeat for confidence (missing)"}
+      ],
+      "citations":["LIT-02","LIT-01","LIT-08"],
+      "inference":"baseline_control_not_process_approval"
+    },
+    {
+      "id": "R-HEAP-COLUMN-SCREEN",
+      "description": "Potentially heap-amenable crushed oxidized ore merits column test and loaded Ksat measurement when the site concept allows a pad; no Au-grade threshold.",
+      "predicate": {"all": [
+        {"field":"mineralogy.weathering_state","op":"==","value":"oxidized"},
+        {"field":"site.heap_pad_suitable","op":"==","value":true}
+      ]},
+      "priority": 1,
+      "candidate_routes": ["HEAP_ADR"],
+      "testwork": [
+        {"test_id":"heap_adr_final","label":"Gold column and downstream ADR test, independently accounted"},
+        {"test_id":"scoping_infiltration","label":"Unloaded laboratory infiltration screening; not loaded Ksat"},
+        {"test_id":"loaded_ksat","label":"Hydraulic conductivity/percolation at simulated stack load (missing)"},
+        {"test_id":"agglomeration_stability","label":"Agglomerate, fines and slump screening (missing)"}
+      ],
+      "citations":["LIT-09","LIT-10","LIT-11"],
+      "inference":"investigate_only_no_grade_threshold"
+    }
+  ],
+  "excluded_from_public_rules": [
+    {"id":"R-PREG-ROBBING-RISK","reason":"No positive measured preg-robbing case in A–D; total organic carbon and an uncalibrated index are not a valid gate.","citations":["LIT-12"]},
+    {"id":"R-GEOCHEMICAL-S-AND-AS-CUTOFF","reason":"Arbitrary percentage cutoffs do not establish sulfide speciation or gold entrapment; S/As remain contextual data for requesting mineralogy.","citations":["LIT-02","LIT-05"]}
+  ]
+}

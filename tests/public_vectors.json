@@ -1,0 +1,214 @@
+[
+  {
+    "evidence_status": "synthetic_supported",
+    "grade_gpt": "0.6",
+    "hypothetical_leaders": [],
+    "leaders": [
+      "HEAP_ADR"
+    ],
+    "model": "constant_recovery",
+    "result_label": "illustrative_what_if_leader",
+    "scores": {
+      "DIRECT_CIL": "9.45",
+      "HEAP_ADR": "18.17"
+    },
+    "test_status": "PUBLIC_REPRODUCIBLE_SYNTHETIC_VECTOR_NOT_HIDDEN_ORACLE"
+  },
+  {
+    "evidence_status": "requires_independent_variability_testwork",
+    "grade_gpt": "0.6",
+    "hypothetical_leaders": [
+      "HEAP_ADR"
+    ],
+    "leaders": [],
+    "model": "constant_residue",
+    "result_label": "hypothesis_only_no_qualified_ranking",
+    "scores": {
+      "DIRECT_CIL": "7.27",
+      "HEAP_ADR": "13.83"
+    },
+    "test_status": "PUBLIC_REPRODUCIBLE_SYNTHETIC_VECTOR_NOT_HIDDEN_ORACLE"
+  },
+  {
+    "evidence_status": "synthetic_supported",
+    "grade_gpt": "0.8",
+    "hypothetical_leaders": [],
+    "leaders": [
+      "HEAP_ADR"
+    ],
+    "model": "constant_recovery",
+    "result_label": "synthetic_screening_leader",
+    "scores": {
+      "DIRECT_CIL": "26.29",
+      "HEAP_ADR": "32.81"
+    },
+    "test_status": "PUBLIC_REPRODUCIBLE_SYNTHETIC_VECTOR_NOT_HIDDEN_ORACLE"
+  },
+  {
+    "evidence_status": "requires_independent_variability_testwork",
+    "grade_gpt": "0.8",
+    "hypothetical_leaders": [
+      "HEAP_ADR"
+    ],
+    "leaders": [],
+    "model": "constant_residue",
+    "result_label": "hypothesis_only_no_qualified_ranking",
+    "scores": {
+      "DIRECT_CIL": "26.27",
+      "HEAP_ADR": "32.83"
+    },
+    "test_status": "PUBLIC_REPRODUCIBLE_SYNTHETIC_VECTOR_NOT_HIDDEN_ORACLE"
+  },
+  {
+    "evidence_status": "synthetic_supported",
+    "grade_gpt": "1.2",
+    "hypothetical_leaders": [],
+    "leaders": [
+      "HEAP_ADR"
+    ],
+    "model": "constant_recovery",
+    "result_label": "illustrative_what_if_leader",
+    "scores": {
+      "DIRECT_CIL": "60.41",
+      "HEAP_ADR": "61.58"
+    },
+    "test_status": "PUBLIC_REPRODUCIBLE_SYNTHETIC_VECTOR_NOT_HIDDEN_ORACLE"
+  },
+  {
+    "evidence_status": "requires_independent_variability_testwork",
+    "grade_gpt": "1.2",
+    "hypothetical_leaders": [
+      "HEAP_ADR"
+    ],
+    "leaders": [],
+    "model": "constant_residue",
+    "result_label": "hypothesis_only_no_qualified_ranking",
+    "scores": {
+      "DIRECT_CIL": "64.27",
+      "HEAP_ADR": "70.83"
+    },
+    "test_status": "PUBLIC_REPRODUCIBLE_SYNTHETIC_VECTOR_NOT_HIDDEN_ORACLE"
+  },
+  {
+    "evidence_status": "synthetic_supported",
+    "grade_gpt": "1.28",
+    "hypothetical_leaders": [],
+    "leaders": [
+      "HEAP_ADR",
+      "DIRECT_CIL"
+    ],
+    "model": "constant_recovery",
+    "result_label": "indifference_zone",
+    "scores": {
+      "DIRECT_CIL": "67.23",
+      "HEAP_ADR": "67.32"
+    },
+    "test_status": "PUBLIC_REPRODUCIBLE_SYNTHETIC_VECTOR_NOT_HIDDEN_ORACLE"
+  },
+  {
+    "evidence_status": "requires_independent_variability_testwork",
+    "grade_gpt": "1.28",
+    "hypothetical_leaders": [
+      "HEAP_ADR"
+    ],
+    "leaders": [],
+    "model": "constant_residue",
+    "result_label": "hypothesis_only_no_qualified_ranking",
+    "scores": {
+      "DIRECT_CIL": "71.87",
+      "HEAP_ADR": "78.43"
+    },
+    "test_status": "PUBLIC_REPRODUCIBLE_SYNTHETIC_VECTOR_NOT_HIDDEN_ORACLE"
+  },
+  {
+    "evidence_status": "synthetic_supported",
+    "grade_gpt": "1.30",
+    "hypothetical_leaders": [],
+    "leaders": [
+      "DIRECT_CIL",
+      "HEAP_ADR"
+    ],
+    "model": "constant_recovery",
+    "result_label": "indifference_zone",
+    "scores": {
+      "DIRECT_CIL": "68.94",
+      "HEAP_ADR": "68.75"
+    },
+    "test_status": "PUBLIC_REPRODUCIBLE_SYNTHETIC_VECTOR_NOT_HIDDEN_ORACLE"
+  },
+  {
+    "evidence_status": "requires_independent_variability_testwork",
+    "grade_gpt": "1.30",
+    "hypothetical_leaders": [
+      "HEAP_ADR"
+    ],
+    "leaders": [],
+    "model": "constant_residue",
+    "result_label": "hypothesis_only_no_qualified_ranking",
+    "scores": {
+      "DIRECT_CIL": "73.77",
+      "HEAP_ADR": "80.33"
+    },
+    "test_status": "PUBLIC_REPRODUCIBLE_SYNTHETIC_VECTOR_NOT_HIDDEN_ORACLE"
+  },
+  {
+    "evidence_status": "synthetic_supported",
+    "grade_gpt": "1.4",
+    "hypothetical_leaders": [],
+    "leaders": [
+      "DIRECT_CIL"
+    ],
+    "model": "constant_recovery",
+    "result_label": "illustrative_what_if_leader",
+    "scores": {
+      "DIRECT_CIL": "77.47",
+      "HEAP_ADR": "75.92"
+    },
+    "test_status": "PUBLIC_REPRODUCIBLE_SYNTHETIC_VECTOR_NOT_HIDDEN_ORACLE"
+  },
+  {
+    "evidence_status": "requires_independent_variability_testwork",
+    "grade_gpt": "1.4",
+    "hypothetical_leaders": [
+      "HEAP_ADR"
+    ],
+    "leaders": [],
+    "model": "constant_residue",
+    "result_label": "hypothesis_only_no_qualified_ranking",
+    "scores": {
+      "DIRECT_CIL": "83.27",
+      "HEAP_ADR": "89.83"
+    },
+    "test_status": "PUBLIC_REPRODUCIBLE_SYNTHETIC_VECTOR_NOT_HIDDEN_ORACLE"
+  },
+  {
+    "evidence_status": "synthetic_supported",
+    "grade_gpt": "1.6",
+    "hypothetical_leaders": [],
+    "leaders": [
+      "DIRECT_CIL"
+    ],
+    "model": "constant_recovery",
+    "result_label": "illustrative_what_if_leader",
+    "scores": {
+      "DIRECT_CIL": "94.52",
+      "HEAP_ADR": "90.25"
+    },
+    "test_status": "PUBLIC_REPRODUCIBLE_SYNTHETIC_VECTOR_NOT_HIDDEN_ORACLE"
+  },
+  {
+    "evidence_status": "requires_independent_variability_testwork",
+    "grade_gpt": "1.6",
+    "hypothetical_leaders": [
+      "HEAP_ADR"
+    ],
+    "leaders": [],
+    "model": "constant_residue",
+    "result_label": "hypothesis_only_no_qualified_ranking",
+    "scores": {
+      "DIRECT_CIL": "102.27",
+      "HEAP_ADR": "108.83"
+    },
+    "test_status": "PUBLIC_REPRODUCIBLE_SYNTHETIC_VECTOR_NOT_HIDDEN_ORACLE"
+  }
+]

@@ -1,0 +1,56 @@
+name: Verify and publish Ore Decision Lab
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify computation and static assets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned TypeScript compiler
+        run: npm install --global typescript@5.9.3
+      - name: Build and run tests
+        run: npm run test
+
+  publish:
+    name: Publish to GitHub Pages
+    if: github.event_name != 'pull_request' && vars.ODL_PUBLISH_ENABLED == 'true'
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned TypeScript compiler
+        run: npm install --global typescript@5.9.3
+      - name: Check publisher identity and contact
+        run: python3 scripts/check_publication.py
+      - name: Build static Pages payload
+        run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

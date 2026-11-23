@@ -1,0 +1,78 @@
+{
+  "A": {
+    "assays": {
+      "Au_gpt": "2.4",
+      "S_pct": "0.18",
+      "As_pct": "0.03",
+      "organic_C_pct": "0.12"
+    },
+    "mineralogy": {
+      "free_au_fraction": "0.45",
+      "sulphide_host_fraction": "0.12",
+      "other_host_fraction": "0.43",
+      "coarse_free_gold_fraction": "0.10",
+      "preg_robbing_index": "0.03",
+      "coarse_gold_observed": true,
+      "gold_entrapment_mode": "not_demonstrated",
+      "direct_leach_control_warranted": true,
+      "weathering_state": "unclassified"
+    }
+  },
+  "B": {
+    "assays": {
+      "Au_gpt": "2.4",
+      "S_pct": "3.6",
+      "As_pct": "0.8",
+      "organic_C_pct": "0.12"
+    },
+    "mineralogy": {
+      "free_au_fraction": "0.05",
+      "sulphide_host_fraction": "0.78",
+      "other_host_fraction": "0.17",
+      "coarse_free_gold_fraction": "0.02",
+      "preg_robbing_index": "0.04",
+      "coarse_gold_observed": false,
+      "gold_entrapment_mode": "sulfide_locked",
+      "direct_leach_control_warranted": true,
+      "weathering_state": "unclassified"
+    }
+  },
+  "C": {
+    "assays": {
+      "Au_gpt": "0.8",
+      "S_pct": "0.18",
+      "As_pct": "0.03",
+      "organic_C_pct": "0.12"
+    },
+    "mineralogy": {
+      "free_au_fraction": "0.38",
+      "sulphide_host_fraction": "0.10",
+      "other_host_fraction": "0.52",
+      "coarse_free_gold_fraction": "0.10",
+      "preg_robbing_index": "0.03",
+      "coarse_gold_observed": true,
+      "gold_entrapment_mode": "not_demonstrated",
+      "direct_leach_control_warranted": true,
+      "weathering_state": "oxidized"
+    }
+  },
+  "D": {
+    "assays": {
+      "Au_gpt": "2.4",
+      "S_pct": "0.18",
+      "As_pct": "0.03",
+      "organic_C_pct": "0.12"
+    },
+    "mineralogy": {
+      "free_au_fraction": "0.66",
+      "sulphide_host_fraction": "0.12",
+      "other_host_fraction": "0.22",
+      "coarse_free_gold_fraction": "0.55",
+      "preg_robbing_index": "0.08",
+      "coarse_gold_observed": true,
+      "gold_entrapment_mode": "not_demonstrated",
+      "direct_leach_control_warranted": true,
+      "weathering_state": "unclassified"
+    }
+  }
+}
