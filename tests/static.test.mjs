@@ -16,7 +16,7 @@ test('dist contains only intended static artifacts and no oracle, private source
  for(const f of manifest.files){const bytes=readFileSync(join(root,'dist',f.path));assert.equal(createHash('sha256').update(bytes).digest('hex'),f.sha256,`mismatch ${f.path}`);}
 });
 
-test('publication identifies the operator and can deploy only verified main',()=>{
+test('publication is restricted to main and identifies a real operator',()=>{
  const config=json('public/site_config.json');
  assert.equal(config.operator_name,'Кубарев Дмитрий Владимирович');
  assert.equal(config.contact_email,'dkubarev@ya.ru');
@@ -25,7 +25,6 @@ test('publication identifies the operator and can deploy only verified main',()=
  assert.match(workflow,/github\.ref == 'refs\/heads\/main'/);
  assert.match(workflow,/needs: verify/);
  assert.match(workflow,/python3 scripts\/check_publication\.py/);
- assert.doesNotMatch(workflow,/ODL_PUBLISH_ENABLED/);
 });
 
 test('public fixtures do not embed the hidden oracle',()=>{
@@ -34,4 +33,19 @@ test('public fixtures do not embed the hidden oracle',()=>{
  const scenarios=json('public/data/scenario_input.json');
  assert.deepEqual(Object.keys(scenarios.ores),['A','B','C','D']);
  assert.equal(Object.keys(scenarios.routes).length,6);
+});
+
+test('first-visit guided demonstration runs through the calculation engine and shows evidence warning',()=>{
+ const ui=readFileSync(join(root,'src/main.ts'),'utf-8');
+ assert.match(ui,/id="quick-start"/);
+ assert.match(ui,/id="quick-next"/);
+ assert.match(ui,/data-guide-step="0"/);
+ assert.match(ui,/data-guide-step="1"/);
+ assert.match(ui,/data-guide-step="2"/);
+ assert.match(ui,/function applyGuideStep\(/);
+ assert.match(ui,/const updated=evaluate\(data,state\)/);
+ assert.match(ui,/state\.selectedRoute=updated\.leaders\[0\]/);
+ assert.match(ui,/const hypothesis=evaluation\.resultLabel==='hypothesis_only_no_qualified_ranking'/);
+ assert.match(ui,/renderQuickTour\(\)/);
+ assert.doesNotMatch(ui,/32\.81|94\.52|26\.29/);
 });

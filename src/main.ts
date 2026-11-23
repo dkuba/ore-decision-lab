@@ -116,6 +116,8 @@ async function loadData():Promise<FixtureData>{
 let data:FixtureData;
 let siteConfig:{operator_name:string;contact_email:string;publication_note?:string}={operator_name:'',contact_email:''};
 let state:UIState=initialState();
+/** Narrative is presentation-only. Every scenario state is evaluated by the same calculation engine. */
+let guideStep:0|1|2|null=window.location.search?null:0;
 let evaluation:Evaluation;
 let fingerprintCounter=0;
 const app=document.getElementById('app')!;
@@ -132,6 +134,14 @@ function renderLayout(){
  <main>
   <div class="wrap hero"><div><div class="breadcrumb"><span class="dot"></span>${esc(txt.lab)}<span style="color:#aab8bd">/</span> 01</div><h1>${esc(txt.title)}</h1><p class="hero-description">${esc(txt.intro)}</p></div>
   <div class="hero-callout"><div class="callout-symbol">${icon('shield',21)}</div><div><strong>${state.lang==='ru'?'Честная инженерная гипотеза':'Transparent engineering hypothesis'}</strong><span>${state.lang==='ru'?'Опыты, ограничения и источники доступны для самостоятельной проверки.':'Measured synthetic data, constraints and sources can be inspected.'}</span></div></div></div>
+  <div class="wrap" id="quick-start">
+   <section class="quick-tour" aria-labelledby="quick-title">
+    <div class="quick-heading"><div><div class="quick-kicker">${state.lang==='ru'?'ПРОВЕРЬТЕ САМИ · 60 СЕКУНД':'TRY IT YOURSELF · 60 SECONDS'}</div><h2 id="quick-title">${state.lang==='ru'?'Одно изменение данных — другая технологическая схема':'One input change can change the process'}</h2><p>${state.lang==='ru'?'Ничего не нужно вводить. Нажмите по шагам и посмотрите, когда расчёт меняет вывод — а когда честно отказывается его делать.':'No setup required. Follow the steps to see when the calculation changes its answer — and when evidence is too weak to decide.'}</p></div><button type="button" class="primary-btn quick-next" id="quick-next">${state.lang==='ru'?'Проверить на примере':'Try an example'} ${icon('arrow',16)}</button></div>
+    <div class="quick-steps" role="group" aria-label="${state.lang==='ru'?'Шаги демонстрации':'Demo steps'}"><button type="button" class="quick-step" data-guide-step="0"><span class="quick-step-num">01</span><span>${state.lang==='ru'?'Исходная руда':'Starting ore'}<strong>Au 0,80 ${state.lang==='ru'?'г/т':'g/t'}</strong></span></button><button type="button" class="quick-step" data-guide-step="1"><span class="quick-step-num">02</span><span>${state.lang==='ru'?'Больше золота':'Higher grade'}<strong>Au 1,60 ${state.lang==='ru'?'г/т':'g/t'}</strong></span></button><button type="button" class="quick-step" data-guide-step="2"><span class="quick-step-num">03</span><span>${state.lang==='ru'?'Меняем допущение':'Change assumption'}<strong>${state.lang==='ru'?'Другие потери':'Different tailings loss'}</strong></span></button></div>
+    <div class="quick-live" id="quick-live" aria-live="polite" aria-atomic="true"></div>
+    <div class="quick-bottom"><span>${state.lang==='ru'?'Все руды, испытания и цены вымышлены. Это объяснение метода, а не проект фабрики.':'All ores, experiments and costs are fictional. This explains a method, not a plant design.'}</span><div class="quick-links"><button type="button" class="quick-detail" id="quick-detail">${state.lang==='ru'?'Проверить формулы и источники':'Inspect formulas and sources'} ${icon('arrow',14)}</button><button type="button" class="quick-detail" id="quick-contact">${state.lang==='ru'?'Есть реальное месторождение?':'Have a real project?'} ${icon('arrow',14)}</button></div></div>
+   </section>
+  </div>
   <div class="wrap"><div class="status-banner">${icon('info',17)}<span><strong>SYNTHETIC DATA</strong> · ${esc(txt.notice)}</span></div></div>
   <div class="wrap workbench" id="experiment">
    <aside class="sidebar panel"><div class="panel-header"><h2>${esc(txt.scenarios)}</h2><p class="sub">${state.lang==='ru'?'Исследуем четыре разных свойства руды':'Four contrasting ore behaviours'}</p></div><div class="panel-body">
@@ -176,6 +186,55 @@ function renderLayout(){
  <div class="modal" id="source-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-title"><div class="dialog"><div class="dialog-head"><h3 id="modal-title">Source</h3><button class="dialog-close" id="modal-close" aria-label="Close">×</button></div><div class="dialog-body" id="modal-body"></div></div></div>`;
  bindStaticEvents();renderControls();refresh();
 }
+function applyGuideStep(step:0|1|2){
+ guideStep=step;
+ state.ore='C';
+ state.grade=step===0?'0.8':'1.6';
+ state.lossModel=step===2?'constant_residue':'constant_recovery';
+ state.mineralogyAvailable=true;
+ state.testworkAvailable=true;
+ state.heapSiteFeasible=true;
+ // Derive the selected route from the calculation, never from an answer table.
+ const updated=evaluate(data,state);
+ state.selectedRoute=updated.leaders[0]??updated.hypotheticalLeaders[0]??'HEAP_ADR';
+ renderControls();
+ const mineralogy=$('#mineralogy') as HTMLInputElement|null;
+ const testwork=$('#testwork') as HTMLInputElement|null;
+ if(mineralogy)mineralogy.checked=true;
+ if(testwork)testwork.checked=true;
+ refresh();
+}
+function renderQuickTour(){
+ const container=$('#quick-live');if(!container)return;
+ const lang=state.lang;
+ const isRu=lang==='ru';
+ const currentOre=state.ore;
+ const route=evaluation.leaders[0]??null;
+ const hypothetical=evaluation.hypotheticalLeaders[0]??null;
+ const grade=fmt(evaluation.inputs.resolvedGrade,2,lang);
+ const result=route?nameOfRoute(route,lang):isRu?'Нет подтверждённого лидера':'No evidence-backed leader';
+ const hypothesis=evaluation.resultLabel==='hypothesis_only_no_qualified_ranking';
+ const evidenceLabel=hypothesis?(isRu?'НЕПОДТВЕРЖДЁННАЯ ГИПОТЕЗА':'UNSUPPORTED HYPOTHESIS'):evaluation.evidenceStatus==='out_of_scope'?(isRu?'ВНЕ ДИАПАЗОНА ОПЫТОВ':'OUTSIDE TESTED RANGE'):route?(isRu?'УЧЕБНЫЙ РАСЧЁТ':'SYNTHETIC CALCULATION'):(isRu?'НУЖНЫ ИСПЫТАНИЯ':'TESTWORK NEEDED');
+ const text=hypothesis?(isRu?`В этой гипотезе условно выше ${hypothetical?nameOfRoute(hypothetical,lang):'один маршрут'}, но она противоречит крайним опытам. Подтверждённого решения нет.`:`This assumption favours ${hypothetical?nameOfRoute(hypothetical,lang):'one route'}, but disagrees with endpoint tests. There is no evidence-backed winner.`):
+  route?(isRu?'Расчёт сравнивает два способа переработки одного типа руды. Более высокое извлечение не всегда означает более выгодную схему.':'The model compares two routes for the same ore. Higher recovery does not always mean better illustrative economics.'):
+  isRu?'Расчёт не позволяет надёжно сравнить схемы при этих входных условиях.':'These inputs do not support a reliable comparison.';
+ const cRoute=(id:RouteId)=>evaluation.alternatives.find(x=>x.route_id===id);
+ const heap=cRoute('HEAP_ADR'),cil=cRoute('DIRECT_CIL');
+ const rows:RouteEvaluation[]=currentOre==='C'?[heap,cil].filter((r):r is RouteEvaluation=>r!==undefined):evaluation.alternatives.filter(r=>r.status==='synthetic_supported').slice(0,2);
+ const label=(r:RouteEvaluation|undefined)=>r?.screening_value_USD_per_t===undefined?'—':fmt(r.screening_value_USD_per_t,2,lang);
+ const active=guideStep;
+ document.querySelectorAll<HTMLButtonElement>('[data-guide-step]').forEach(btn=>{
+  const step=Number(btn.dataset.guideStep);
+  const chosen=step===active;
+  btn.classList.toggle('is-active',chosen);
+  btn.setAttribute('aria-pressed',chosen?'true':'false');
+ });
+ const id=currentOre==='C'?(isRu?'Руда C':'Ore C'):(isRu?`Руда ${currentOre}`:`Ore ${currentOre}`);
+ container.innerHTML=`<div class="quick-answer"><div><span class="quick-eyebrow">${esc(id)} · Au ${esc(grade)} ${isRu?'г/т':'g/t'} · ${esc(evidenceLabel)}</span><div class="quick-answer-title">${esc(result)}</div><p>${esc(text)}</p></div><div class="quick-numbers">${rows.map(r=>`<div><span>${esc(nameOfRoute(r.route_id,lang))}</span><strong>${label(r)}</strong></div>`).join('')}<small>${isRu?'Условный показатель, USD на тонну руды · не NPV':'Illustrative USD per tonne of ore · not NPV'}</small></div></div>${hypothesis?`<div class="quick-uncertainty">${icon('alert',17)} ${esc(isRu?'Система не утверждает победителя: выбранная модель потерь расходится с синтетическими испытаниями.':'No winner can be confirmed: this loss model disagrees with synthetic tests.')}</div>`:''}`;
+ const next=$('#quick-next') as HTMLButtonElement|null;
+ if(next){const nextText=active===0?(isRu?'Увеличить содержание до 1,60 г/т':'Increase grade to 1.60 g/t'):active===1?(isRu?'Проверить другое допущение':'Test a different assumption'):active===2?(isRu?'Открыть инженерные доказательства':'Open engineering evidence'):(isRu?'Начать с руды C':'Start with ore C');next.innerHTML=esc(nextText)+' '+icon('arrow',16);}
+}
+function guideLeave(){guideStep=null;}
 function renderControls(){
  const txt=t(),lang=state.lang;
  const choice=$('#ore-choices')!;
@@ -189,25 +248,32 @@ function renderControls(){
  const assays=data.scenario.ores[state.ore].assays;
  const min=data.scenario.ores[state.ore].mineralogy;
  $('#ore-profile')!.innerHTML=`<div class="basis-grid">${[['Au',`${fmt(Number(assays.Au_gpt),2,lang)} g/t`],['S',`${fmt(Number(assays.S_pct),2,lang)}%`],['As',`${fmt(Number(assays.As_pct),2,lang)}%`],['Corg',`${fmt(Number(assays.organic_C_pct),2,lang)}%`]].map(([k,v])=>`<div class="basis-item"><span class="t">${esc(k)}</span><span class="v">${esc(v)}</span></div>`).join('')}</div><div class="assoc"><div class="assoc-row" title="Gold deportment"><span style="width:${Number(min.free_au_fraction)*100}%"></span><span style="width:${Number(min.sulphide_host_fraction)*100}%"></span><span style="width:${Number(min.other_host_fraction)*100}%"></span></div></div><div class="assoc-legend"><span>${esc(txt.freeAu)} <b>${fmt(Number(min.free_au_fraction)*100,0,lang)}%</b></span><span>${esc(txt.sulphideAu)} <b>${fmt(Number(min.sulphide_host_fraction)*100,0,lang)}%</b></span></div><p class="micro-note">${lang==='ru'?'Состав и формы золота — синтетические наблюдения, не данные месторождения.':'Composition and deportment are fabricated measurements.'} <button class="source-link" data-protocol="${esc(data.scenario.ore_source_ids[state.ore])}">${esc(txt.source)} →</button></p>`;
- choice.querySelectorAll<HTMLButtonElement>('[data-ore]').forEach(b=>b.addEventListener('click',()=>{state.ore=b.dataset.ore as OreId;state.grade=undefined;state.lossModel='constant_recovery';state.heapSiteFeasible=true;state.selectedRoute=state.ore==='B'?'FLOT_POX_CIL':state.ore==='D'?'GRAVITY_TAILS_CIL':state.ore==='C'?'HEAP_ADR':'DIRECT_CIL';renderControls();refresh();}));
- $('#grade-slider')?.addEventListener('input',event=>{const value=(event.currentTarget as HTMLInputElement).value;state.grade=value;const field=$('#grade') as HTMLInputElement|null;if(field)field.value=Number(value).toFixed(2);refresh();});
+ choice.querySelectorAll<HTMLButtonElement>('[data-ore]').forEach(b=>b.addEventListener('click',()=>{guideLeave();state.ore=b.dataset.ore as OreId;state.grade=undefined;state.lossModel='constant_recovery';state.heapSiteFeasible=true;state.selectedRoute=state.ore==='B'?'FLOT_POX_CIL':state.ore==='D'?'GRAVITY_TAILS_CIL':state.ore==='C'?'HEAP_ADR':'DIRECT_CIL';renderControls();refresh();}));
+ $('#grade-slider')?.addEventListener('input',event=>{const value=(event.currentTarget as HTMLInputElement).value;guideLeave();state.grade=value;const field=$('#grade') as HTMLInputElement|null;if(field)field.value=Number(value).toFixed(2);refresh();});
  const field=$('#grade') as HTMLInputElement|null;
  if(field){
-  const commit=()=>{try{const g=parseNumber(field.value,'Au',{positive:true});state.grade=String(g);field.value=String(g);refresh();}catch(err){showError((err as Error).message);field.value=String(state.grade??'0.8');}};
+  const commit=()=>{try{const g=parseNumber(field.value,'Au',{positive:true});guideLeave();state.grade=String(g);field.value=String(g);refresh();}catch(err){showError((err as Error).message);field.value=String(state.grade??'0.8');}};
   field.addEventListener('change',commit);field.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();field.blur();}});
  }
- $('#try-out-of-scope')?.addEventListener('click',()=>{state.grade='1.85';(($('#grade') as HTMLInputElement)).value='1.85';refresh();});
- document.querySelectorAll<HTMLButtonElement>('[data-loss]').forEach(b=>b.addEventListener('click',()=>{state.lossModel=b.dataset.loss as LossModel;document.querySelectorAll('[data-loss]').forEach(x=>x.classList.toggle('active',(x as HTMLElement).dataset.loss===state.lossModel));refresh();}));
+ $('#try-out-of-scope')?.addEventListener('click',()=>{guideLeave();state.grade='1.85';(($('#grade') as HTMLInputElement)).value='1.85';refresh();});
+ document.querySelectorAll<HTMLButtonElement>('[data-loss]').forEach(b=>b.addEventListener('click',()=>{guideLeave();state.lossModel=b.dataset.loss as LossModel;document.querySelectorAll('[data-loss]').forEach(x=>x.classList.toggle('active',(x as HTMLElement).dataset.loss===state.lossModel));refresh();}));
  const site=$('#site') as HTMLInputElement|null;
- site?.addEventListener('change',()=>{state.heapSiteFeasible=site.checked;refresh();});
+ site?.addEventListener('change',()=>{guideLeave();state.heapSiteFeasible=site.checked;refresh();});
  document.querySelectorAll<HTMLButtonElement>('#ore-profile [data-protocol]').forEach(b=>b.addEventListener('click',()=>void openProtocol(b.dataset.protocol!)));
 }
 function bindStaticEvents(){
+ document.querySelectorAll<HTMLButtonElement>('[data-guide-step]').forEach(b=>b.addEventListener('click',()=>applyGuideStep(Number(b.dataset.guideStep) as 0|1|2)));
+ $('#quick-next')?.addEventListener('click',()=>{
+  if(guideStep===2){state.audience='engineer';document.querySelectorAll<HTMLButtonElement>('[data-audience]').forEach(b=>b.classList.toggle('active',b.dataset.audience==='engineer'));refresh();$('#why-top')?.scrollIntoView({behavior:'smooth',block:'start'});}
+  else applyGuideStep(guideStep===0?1:guideStep===1?2:0);
+ });
+ $('#quick-detail')?.addEventListener('click',()=>{state.audience='engineer';document.querySelectorAll<HTMLButtonElement>('[data-audience]').forEach(b=>b.classList.toggle('active',b.dataset.audience==='engineer'));refresh();$('#why-top')?.scrollIntoView({behavior:'smooth',block:'start'});});
+ $('#quick-contact')?.addEventListener('click',()=>{$('#pilot-draft')?.click();});
  const mn=$('#mineralogy') as HTMLInputElement,tw=$('#testwork') as HTMLInputElement;
- mn.addEventListener('change',()=>{state.mineralogyAvailable=mn.checked;refresh();});
- tw.addEventListener('change',()=>{state.testworkAvailable=tw.checked;refresh();});
+ mn.addEventListener('change',()=>{guideLeave();state.mineralogyAvailable=mn.checked;refresh();});
+ tw.addEventListener('change',()=>{guideLeave();state.testworkAvailable=tw.checked;refresh();});
  $('#language')?.addEventListener('click',()=>{state.lang=state.lang==='ru'?'en':'ru';localStorage.setItem('odl-lang',state.lang);renderLayout();});
- $('#reset')?.addEventListener('click',()=>{const lang=state.lang,audience=state.audience;state={...initialState(),lang,audience};renderControls();refresh();});
+ $('#reset')?.addEventListener('click',()=>{const lang=state.lang,audience=state.audience;guideStep=0;state={...initialState(),lang,audience};renderControls();refresh();});
  $('#share')?.addEventListener('click',async()=>{
   const url=activeURL(state).toString();
   try{await navigator.clipboard.writeText(url);toast(t().copyDone);}catch{showTextModal(t().share,`<p>${esc(url)}</p>`);}
@@ -276,7 +342,7 @@ function refresh(){
   const special=state.ore==='C'&&state.lossModel==='constant_residue'&&evaluation.evidenceStatus!=='out_of_scope'&&evaluation.alternatives.some(x=>x.status==='synthetic_supported');
   $('#status-message')!.innerHTML=(special?`<div class="callout warn">${icon('alert',18)}<span>${esc(txt.hypoWarning)}</span></div>`:evaluation.evidenceStatus==='out_of_scope'?`<div class="callout bad">${icon('alert',18)}<span>${esc(txt.scopeWarning)}</span></div>`:evaluation.resultLabel==='provisional_calculation_only'?`<div class="callout warn">${icon('info',17)}<span>${esc(result.body)}</span></div>`:'');
   $('#chart-panel')!.innerHTML=state.ore==='C'?renderChart():renderAlternateChart();
-  renderRoutes();renderRules();renderWhy();renderTestwork();
+  renderRoutes();renderRules();renderWhy();renderTestwork();renderQuickTour();
   const slider=$('#grade-slider') as HTMLInputElement|null;
   if(slider){slider.value=String(Math.max(.6,Math.min(1.6,getGrade())));slider.style.background=`linear-gradient(to right,var(--teal) ${((Math.max(.6,Math.min(1.6,getGrade()))-.6)/1)*100}%,#e3edef 0%)`;}
   const url=activeURL(state);
