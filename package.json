@@ -1,7 +1,7 @@
 {
   "name": "ore-decision-lab",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "description": "Evidence-driven, fully synthetic gold process decision laboratory for GitHub Pages.",
   "scripts": {
